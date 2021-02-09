@@ -1,4 +1,4 @@
-package me.yushust.votes.common.cmd;
+package me.yushust.votes.bukkit.command;
 
 import org.bukkit.command.CommandSender;
 import org.json.simple.JSONArray;
@@ -11,9 +11,9 @@ import java.util.logging.Level;
  * Comando para obtener las estadísticas de tu servidor en 40ServidoresMC
  * @author Cadiducho
  */
-public class StatsCMD extends CommandBase {
+public class StatsCommand extends CommandBase {
     
-    public StatsCMD() {
+    public StatsCommand() {
         super("stats40", "40servidores.stats", Collections.emptyList());
     }
     

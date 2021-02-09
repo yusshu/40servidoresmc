@@ -1,4 +1,4 @@
-package me.yushust.votes.common.cmd;
+package me.yushust.votes.bukkit.command;
 
 import me.yushust.votes.common.util.Cooldown;
 import org.bukkit.command.CommandSender;
