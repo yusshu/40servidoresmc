@@ -1,7 +1,7 @@
-package me.yushust.cservidoresmc.common.api;
+package me.yushust.votes.common.api;
 
 import com.google.gson.Gson;
-import me.yushust.cservidoresmc.common.config.ConfigurationAdapter;
+import me.yushust.votes.common.config.ConfigurationAdapter;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

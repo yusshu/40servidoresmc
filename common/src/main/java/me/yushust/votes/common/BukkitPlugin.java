@@ -1,4 +1,4 @@
-package com.cadiducho.cservidoresmc.bukkit;
+package me.yushust.votes.common;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

@@ -1,4 +1,4 @@
-package com.cadiducho.cservidoresmc.bukkit.util;
+package me.yushust.votes.common.util;
 
 import org.bukkit.command.CommandSender;
 

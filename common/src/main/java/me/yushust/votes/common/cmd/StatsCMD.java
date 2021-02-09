@@ -1,4 +1,4 @@
-package com.cadiducho.cservidoresmc.bukkit.cmd;
+package me.yushust.votes.common.cmd;
 
 import org.bukkit.command.CommandSender;
 import org.json.simple.JSONArray;

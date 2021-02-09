@@ -1,6 +1,6 @@
-package com.cadiducho.cservidoresmc.bukkit.cmd;
+package me.yushust.votes.common.cmd;
 
-import com.cadiducho.cservidoresmc.bukkit.util.Cooldown;
+import me.yushust.votes.common.util.Cooldown;
 import org.bukkit.command.CommandSender;
 import org.json.simple.JSONObject;
 

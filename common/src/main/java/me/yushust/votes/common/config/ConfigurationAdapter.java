@@ -1,4 +1,4 @@
-package me.yushust.cservidoresmc.common.config;
+package me.yushust.votes.common.config;
 
 /**
  * Configuration abstraction, used to support

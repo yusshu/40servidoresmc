@@ -1,7 +1,7 @@
-package me.yushust.cservidoresmc.common.serialize;
+package me.yushust.votes.common.serialize;
 
 import com.google.gson.*;
-import me.yushust.cservidoresmc.common.api.ServerStatistics;
+import me.yushust.votes.common.api.ServerStatistics;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package me.yushust.cservidoresmc.common.api;
+package me.yushust.votes.common.api;
 
 import java.util.List;
 
