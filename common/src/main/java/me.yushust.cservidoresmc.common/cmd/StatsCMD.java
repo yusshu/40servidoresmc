@@ -1,6 +1,5 @@
 package com.cadiducho.cservidoresmc.bukkit.cmd;
 
-import com.cadiducho.cservidoresmc.bukkit.util.ApiResponse;
 import com.cadiducho.cservidoresmc.bukkit.util.Util;
 import org.bukkit.command.CommandSender;
 import org.json.simple.JSONArray;

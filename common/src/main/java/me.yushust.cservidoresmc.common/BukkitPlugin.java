@@ -1,7 +1,5 @@
 package com.cadiducho.cservidoresmc.bukkit;
 
-import com.cadiducho.cservidoresmc.bukkit.util.MetricsLite;
-import com.cadiducho.cservidoresmc.bukkit.util.Updater;
 import com.cadiducho.cservidoresmc.bukkit.util.Util;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;

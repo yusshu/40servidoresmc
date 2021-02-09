@@ -1,12 +1,10 @@
-#Antiguo stuff de NB
-/nbproject/private/
-nbproject/
+# gradle files
+.gradle
+
+# build dirs
 /build/
-/dist/
+/common/build/
 
-#Maven
-/target/
-target/ 
-\.idea/
-
+# ide files
+.idea
 *.iml

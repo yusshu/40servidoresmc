@@ -1,0 +1,31 @@
+# 40ServidoresMC API Configuration
+api:
+  # The API Key
+  key: "Your API Key for 40ServidoresMC"
+  # The response read timeout (milliseconds)
+  response-timeout: 5000
+# Command used to vote
+command: "vote"
+# The rewards (commands, executed by console)
+rewards:
+- "money add %player% 1000"
+# Broadcast settings
+broadcast:
+  enabled: true
+  send-broadcast-to-voter: false
+# Messages, with support for multi-language (language
+# is determined by the player client)
+messages:
+  es:
+    broadcast:
+    - "&6>>"
+    - "&6>> &fGracias &8%player% &fpor votar por nuestro servidor"
+    - "&6>>      &f¡&8%player% &fya ha obtenido su premio!"
+    - "&6>>       &f¿Qué esperas para obtenerlo tú también?"
+    - "&6>>         &f¡Usa &e&l/%command% &fy obtén tu premio!"
+    - "&6>>"
+    message:
+    - "&6>>"
+    - "&6>> &fMuchas gracias por votar por nosotros"
+    - "&6>>   &f¡Aquí tienes un regalo por eso!"
+    - "&6>>"
