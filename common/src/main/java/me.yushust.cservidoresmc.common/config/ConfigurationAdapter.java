@@ -9,4 +9,7 @@ public interface ConfigurationAdapter {
   /** Gets the string at the given {@code path} */
   String getString(String path);
 
+  /** Gets the integer value at the given {@code path} */
+  int getInt(String path);
+
 }
