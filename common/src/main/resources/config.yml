@@ -1,3 +1,14 @@
+
+asyncops:
+  # Determines the executor type,
+  # - 'platform': Uses the platform-dependent scheduler
+  # - 'fixed-thread-pool': Uses a separated fixed thread pool
+  executor: "platform"
+
+  # Determines the allocated threads
+  # used by the thread pools
+  threads: 8
+
 # 40ServidoresMC API Configuration
 api:
   # The API Key
@@ -16,6 +27,19 @@ broadcast:
 # Messages, with support for multi-language (language
 # is determined by the player client)
 messages:
+  stats:
+    template:
+     - "&6>>"
+     - "&6>> &f&l%name% &6#%place%"
+     - "&6>> &e>> &a%day_votes% &fvotos hoy &8(%rewarded_day_votes% fueron recompensados)"
+     - "&6>> &e>> &a%week_votes% &fvotos esta semana &8(%rewarded_week_votes% fueron recompensados)"
+     - "&6>> &e>> %last20votes%"
+     - "&6>>"
+    last20votes:
+      element:
+        rewarded: "&a%voter%"
+        not-rewarded: "&c%voter%"
+      delimiter: ", "
   es:
     broadcast:
     - "&6>>"

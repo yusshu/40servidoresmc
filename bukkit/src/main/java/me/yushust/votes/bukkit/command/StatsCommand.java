@@ -1,53 +1,77 @@
 package me.yushust.votes.bukkit.command;
 
+import me.yushust.votes.common.api.VotesApiClient;
+import me.yushust.votes.common.config.ConfigurationAdapter;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
-import java.util.Collections;
-import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 /**
- * Comando para obtener las estadísticas de tu servidor en 40ServidoresMC
- * @author Cadiducho
+ * Command to check the server statistics from 40servidoresmc
  */
-public class StatsCommand extends CommandBase {
-    
-    public StatsCommand() {
-        super("stats40", "40servidores.stats", Collections.emptyList());
+public class StatsCommand implements CommandExecutor {
+
+  private final VotesApiClient client;
+  private final ConfigurationAdapter config;
+
+  public StatsCommand(
+      VotesApiClient client,
+      ConfigurationAdapter config
+  ) {
+    this.client = client;
+    this.config = config;
+  }
+
+  @Override
+  public boolean onCommand(
+      CommandSender sender,
+      Command command,
+      String label,
+      String[] args
+  ) {
+
+    if (sender.hasPermission("40servidoresmc.stats")) {
+      // TODO: Send no permission message
+      return true;
     }
-    
-    @Override
-    public void run(CommandSender sender, String label, String[] args) {
-        if (!perm(sender, getPermission(), true)) return;
 
-        Util.readUrl("https://40servidoresmc.es/api2.php?estadisticas=1&clave=" + plugin.getConfig().getString("clave"), (ApiResponse response) -> {
-            if (response.getException().isPresent()) {
-                plugin.sendMessage("&cHa ocurrido una excepción. Revisa la consola o avisa a un administrador", sender);
-                plugin.log(Level.SEVERE, "Excepción obteniendo estadisticas: " + response.getException().get().getMessage());
-                return;
-            }
-            
-            JSONObject jsonData = response.getResult();
-            if (jsonData.get("nombre") == null) { //clave mal configurada
-                plugin.sendMessage("&cClave incorrecta. Entra en &bhttps://40servidoresmc.es/miservidor.php &cy cambia esta.", sender);
-                return;
-            }
+    client.fetchStats()
+        .whenComplete((stats, error) -> {
+          if (error != null) {
+            // TODO: Send error message
+            return;
+          }
 
-            plugin.sendMessage("&9==> &7" + jsonData.get("nombre") + " &festá en el TOP &a" + jsonData.get("puesto"), sender);
-            plugin.sendMessage("&bVotos hoy: &6" + jsonData.get("votoshoy"), sender);
-            plugin.sendMessage("&bVotos premiados hoy: &6" + jsonData.get("votoshoypremiados"), sender);
-            plugin.sendMessage("&bVotos semanales: &6" + jsonData.get("votossemanales"), sender);
-            plugin.sendMessage("&bVotos premiados semanales: &6" + jsonData.get("votossemanalespremiados"), sender);
-            JSONArray array = (JSONArray) jsonData.get("ultimos20votos");
-            StringBuilder usuarios = new StringBuilder();
-            for (Object obj : array) {
-                JSONObject object = (JSONObject) obj;
-                String strellita = (Integer.parseInt((String) object.get("recompensado")) == 1) ? "&a" : "&c";
-                usuarios.append(strellita).append(object.get("usuario")).append("&6, ");
-            }
-            usuarios = new StringBuilder(usuarios.substring(0, usuarios.length() - 2) + ".");
-            plugin.sendMessage("&bÚltimos 20 votos: " + usuarios, sender);
+          if (stats == null) {
+            // TODO: Send error message
+            return;
+          }
+
+          String delimiter = config.getString("messages.stats.last20votes.delimiter");
+          String lastVotes = stats.getLastVotes()
+              .stream()
+              .map(vote -> {
+                String elementTemplate = config.getString(
+                    "messages.stats.last20votes.element." +
+                        (vote.isRewarded() ? "rewarded" : "not-rewarded")
+                );
+                return elementTemplate.replace("%voter%", vote.getName());
+              })
+              .collect(Collectors.joining(delimiter));
+
+          sender.sendMessage(
+              config.getString("messages.stats.template")
+                .replace("%name%", stats.getName())
+                .replace("%place%", stats.getPlace() + "")
+                .replace("%day_votes%", stats.getDayVotes() + "")
+                .replace("%rewarded_day_votes%", stats.getRewardedDayVotes() + "")
+                .replace("%week_votes%", stats.getWeekVotes() + "")
+                .replace("%rewarded_week_votes%", stats.getRewardedWeekVotes() + "")
+                .replace("%last20votes%", lastVotes)
+          );
         });
-    }
+    return true;
+  }
 }
